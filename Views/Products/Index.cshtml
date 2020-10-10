@@ -1,0 +1,36 @@
+﻿@model List<SampleProject.Models.Products>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Products</h2>
+
+<table class="table table-bordered table-striped mb-none table-responsive" id="datatable-default">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Stock Available</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr data-item-id="@item.ProductID" id="@item.ProductID">
+            <td style="vertical-align: middle;">@item.Name</td>
+            <td style="vertical-align: middle;">@item.StockAvailable</td>
+            <td style="vertical-align: middle;">@item.Price</td>
+            <td class="actions" style="font-size:2em; text-align:center;vertical-align:central">
+                <a href="@Url.Action("Edit", "Products", new { @id = @item.ProductID })"><i class="glyphicon-pencil"></i></a>
+            </td>
+            <td class="actions" style="text-align:center;vertical-align:central">
+                <a href="@Url.Action("Delete", "Products", new { @id = @item.ProductID })" style="font-size: 19px;">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<a class="btn btn-primary" href="@Url.Action("Add", "Products")"><i class="glyphicon-plus"></i> &nbsp;Add</a>
+

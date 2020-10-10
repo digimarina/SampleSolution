@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/Menu.css" rel="stylesheet" />
+    <link href="~/Content/materialize.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.1.0/cropper.min.css" integrity="sha512-vmXqikRa5kmI3gOQygzml5nV+5NGxG8rt8KWHKj8JYYK12JUl2L8RBfWinFGTzvpwwsIRcINy9mhLyodnmzjig==" crossorigin="anonymous" />
+    <style>
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            width: 100%;
+            background-color: #00bcd4;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            /*position: fixed;*/
+            margin-top: 20px;
+            z-index: 10;
+            bottom: 30px;
+            font-size: 17px;
+        }
+
+            #snackbar.show {
+                visibility: visible;
+                -webkit-animation: fadein 0.5s, fadeout 0.5s 9.5s;
+                animation: fadein 0.5s, fadeout 0.5s 9.5s;
+            }
+    </style>
+</head>
+<body>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+    <div id="nav-container">
+        <div id="nav-overlay"></div>
+        <nav id="nav-fullscreen">
+            <ul>
+                <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                <br />
+                <br />
+                <li><a href="@Url.Action("Index","Products")">Products</a></li>
+            </ul>
+        </nav>
+
+        <a id="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Scripts/Menu.js"></script>
+    <script src="~/Scripts/materialize.min.js"></script>
+    <script type='text/javascript' src='https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/4.1.0/cropper.min.js" integrity="sha512-E+gDQcIvNXE60SjCS38ysf1mGh4ObBpKcUOp0oEaHQHQAdaN2p7GelOpgEdpTuCLoIJyLkNXiqFZbyD9Ak/Ygw==" crossorigin="anonymous"></script>
+</body>
+</html>

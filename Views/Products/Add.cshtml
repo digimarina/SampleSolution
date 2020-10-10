@@ -1,0 +1,67 @@
+﻿@model SampleProject.Models.Products
+@{
+    ViewBag.Title = "Add";
+}
+
+<div class="container">
+    <h2>Add a Product</h2>
+    @using (Html.BeginForm("Add", "Products", FormMethod.Post, new { @id = "ProductsAdd", @name = "ProductsAdd", @enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-md-6">
+                <label>Product Name</label>
+                @Html.TextBoxFor(model => model.Name, new { htmlAttributes = new { @id = "Name", @placeholder = "Product Name", @required = "required" } })
+            </div>
+            <div class="col-md-6">
+                <label>Description</label>
+                @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @id = "Description", @placeholder = "Product Description", @required = "required" } })
+            </div>
+            <div class="col-md-6">
+                <label>Stock Available</label>
+                @Html.TextBoxFor(model => model.StockAvailable, new { htmlAttributes = new { @id = "Stock", @placeholder = "Stock Available", @required = "required" } })
+            </div>
+            <div class="col-md-6">
+                <label>Price</label>
+                @Html.TextBoxFor(model => model.Price, new { htmlAttributes = new { @id = "Price", @placeholder = "Price", @required = "required" } })
+            </div>
+        </div>
+        <div id="divMilestoneImage">
+            <div class="form-group row">
+                <label class="col-md-3 label-control">Product Image</label>
+                <div class="col-md-6 slim" id="cropImageDiv">
+                    <input type="file" class="form-control" value="Upload" id="image" name="image" required title="Please add an image." />
+                </div>
+                <div class="col-md-3">
+                    <a class="btn btn-danger" onclick="jsClearImage()">
+                        Remove
+                    </a>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a class="btn btn-default" href="@Url.Action("Index", "Products")">Back</a>
+    }
+    <div id="snackbar"><span></span></div>
+</div>
+@section scripts{
+    <script>
+    $(document).ready(function () {
+        var Error = '@ViewBag.Error';
+        if (Error) {
+            var x = document.getElementById("snackbar");
+            $("#snackbar").text('There was an error saving the product.');
+            // Add the "show" class to DIV
+            x.className = "show";
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 10000);
+        }
+    });
+    </script>
+    <script>
+        function jsClearImage() {
+            $("#image").val('');
+        }
+    </script>
+}
+

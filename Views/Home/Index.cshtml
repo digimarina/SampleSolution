@@ -1,0 +1,57 @@
+﻿@model List<SampleProject.Models.Products>
+@{
+    ViewBag.Title = "Home Page";
+}
+<div class="row" style="text-align: center;">
+    <h2>Select a Product</h2>
+</div>
+<div class="row">
+    <div class="carousel">
+        @{
+            for (int i = 0; i < Model.Count; i++)
+            {
+                <a class="carousel-item" onclick="DisplayInfo(@Model[i].ProductID)"><img src="../@Model[i].ImagePath/@Model[i].ImageName" width="500"></a>
+            }
+        }
+    </div>
+</div>
+
+@{
+    List<int> id = new List<int>();
+    foreach (var item in Model)
+    {
+        id.Add(item.ProductID);
+
+        <div class="row card" id="@item.ProductID" style="display:none; text-align: center;">
+            <img src="../@item.ImagePath/@item.ImageName" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 id="Name">@item.Name</h5>
+                <p class="card-text" id="Description">@item.Description</p>
+                <h6 class="col-md-6">Stock Available: @item.StockAvailable</h6>
+                <h6 class="col-md-6">R @item.Price</h6>
+            </div>
+        </div>
+    }
+    <input type="hidden" value="@Newtonsoft.Json.JsonConvert.SerializeObject(id)" id="idArray" />
+}
+<script>
+    function DisplayInfo(id) {
+        var array = $("#idArray").val();
+        var allTables = JSON.parse(array);
+        for (var i = 1; i <= allTables.length; i++) {
+            var table = document.getElementById(i).style.display = "none";
+        }
+        document.getElementById(id).style.display = "block";
+    }
+</script>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('.carousel').carousel({
+                indicators: true
+            });
+
+            //$('.carousel.carousel-slider').carousel(
+        });
+    </script>
+}
